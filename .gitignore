@@ -1,0 +1,7 @@
+.settings
+dependencies.groovy
+grails-authorise*.zip*
+plugin.xml
+stacktrace.log
+target/
+web-app/
