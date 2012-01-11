@@ -5,6 +5,7 @@ This plugin provides a framework for authorising actions in Controllers, methods
 No authentication or domain models are provided so you are free to use your own or another plugins'.
 
 The only configuration necessary is to specify the service (authoriseService) that will contain the methods used to authorise actions, by specifying in Config.groovy
+
 ```
 grails.plugins.authorise.authoriseService = 'xyz.AuthoriseService'
 ```
@@ -24,6 +25,7 @@ def showAdmin() {
 ```
 
 will call on the authoriseService class, e.g.
+
 ```groovy
 def hasRole(String role) {
     return adminRoles.contains(role)
