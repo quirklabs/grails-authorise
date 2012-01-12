@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-import org.springframework.aop.support.AopUtils;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
 /**
@@ -32,7 +32,7 @@ public class ProxyUtils
   {
     Class<?> current = clazz;
     
-    while( AopUtils.isCglibProxyClass( current ) )
+    while( ClassUtils.isCglibProxyClass( current ) )
     {
       current = current.getSuperclass();
     }
@@ -49,7 +49,7 @@ public class ProxyUtils
   {
     Class<?> clazz = method.getDeclaringClass();
 
-    if( !AopUtils.isCglibProxyClass( clazz ) )
+    if( !ClassUtils.isCglibProxyClass( clazz ) )
     {
       return method;
     }
@@ -67,7 +67,7 @@ public class ProxyUtils
   {
     Class<?> clazz = constructor.getDeclaringClass();
 
-    if( !AopUtils.isCglibProxyClass( clazz ) )
+    if( !ClassUtils.isCglibProxyClass( clazz ) )
     {
       return constructor;
     }

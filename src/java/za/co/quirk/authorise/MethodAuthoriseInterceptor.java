@@ -57,7 +57,7 @@ public class MethodAuthoriseInterceptor implements Advice, Interceptor, MethodIn
       String expr = annotation.value();
       
       Method serviceMethod = null;
-      List paramValues = new ArrayList();
+      List<Object> paramValues = new ArrayList<Object>();
       
       Pattern pattern = Pattern.compile( "(\\w+)\\((.*)\\)" );
       Matcher matcher = pattern.matcher( expr );
@@ -65,7 +65,7 @@ public class MethodAuthoriseInterceptor implements Advice, Interceptor, MethodIn
       {
         String targetName = matcher.group( 1 );
         
-        List paramClasses = new ArrayList();
+        List<Class> paramClasses = new ArrayList<Class>();
         
         String variables = matcher.group( 2 ).trim();
         if( variables.length() > 0 )
