@@ -32,7 +32,7 @@ grails.plugins.authorise.authoriseService = 'xyz.AuthoriseService'
 You can create and configure this Service automatically by runing the CreateAuthoriseService script e.g. 
 > grails create-authorise-service xyz.Authorise
 
-Authorisation is done by annotating each method with the @Authorise('authoriseMethod()') annotation. Strings can be passed in too e.g.
+Authorisation is done by annotating each action in controllers or each method in services with the @Authorise('authoriseMethod()') annotation. Strings can be passed in too e.g.
 
 @Authorise("hasRole('ADMIN')")
 def showAdmin() {
@@ -52,7 +52,24 @@ def editProject(Project project) {
     ...
 }
 
-In GSPs, the authoriseService is automatically added to the model and can be accessed with other available variables e.g.
+If the authorise method as annotated on a controller or service fails, an exception of type za.co.quirk.authorise.AuthorisationDeniedException will be thrown.
+A good way to handle this is to create an ErrorsController with actions mapped in UrlMappings.groovy to send this exception and other errors to an appropriate GSP page e.g.
+
+import za.co.quirk.authorise.AuthorisationDeniedException
+
+class UrlMappings {
+	static mappings = {
+        .....
+
+        "/"(view:"/index")
+        "403"(controller: "errors", action: "error403")
+        "404"(controller: "errors", action: "error404")
+        "500"(controller: "errors", action: "error500")
+        "500"(controller: "errors", action: "error403", exception: AuthorisationDeniedException)
+	}
+}
+
+In GSPs, the authoriseService is automatically added to the model and can be accessed with other available variables in the page scope e.g.
 <g:if test="${authoriseService.canEdit(project)}">
 	Edit project here
 </g:if>
