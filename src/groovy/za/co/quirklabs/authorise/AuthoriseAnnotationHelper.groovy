@@ -1,4 +1,4 @@
-package za.co.quirk.authorise
+package za.co.quirklabs.authorise
 
 import org.codehaus.groovy.grails.commons.ApplicationHolder as AH
 

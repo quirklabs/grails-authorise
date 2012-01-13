@@ -1,4 +1,4 @@
-package za.co.quirk.authorise;
+package za.co.quirklabs.authorise;
 
 /**
  * Thrown if authorisation is denied for a method.

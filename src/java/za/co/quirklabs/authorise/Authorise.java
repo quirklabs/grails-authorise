@@ -1,4 +1,4 @@
-package za.co.quirk.authorise;
+package za.co.quirklabs.authorise;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

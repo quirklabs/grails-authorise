@@ -9,7 +9,7 @@
  * governing permissions and limitations under the License.
  */
 
-package za.co.quirk.authorise;
+package za.co.quirklabs.authorise;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

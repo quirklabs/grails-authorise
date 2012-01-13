@@ -1,4 +1,4 @@
-package za.co.quirk.authorise;
+package za.co.quirklabs.authorise;
 
 import java.util.*;
 import java.util.regex.*;

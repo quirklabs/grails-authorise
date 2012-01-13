@@ -1,4 +1,4 @@
-import za.co.quirk.authorise.*
+import za.co.quirklabs.authorise.*
 import java.lang.reflect.Method
 import org.codehaus.groovy.grails.commons.ApplicationHolder as AH
 
