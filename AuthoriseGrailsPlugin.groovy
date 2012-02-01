@@ -8,7 +8,7 @@ import org.codehaus.groovy.grails.commons.ApplicationHolder as AH
  */
 class AuthoriseGrailsPlugin {
     // the plugin version
-    def version = "1.1"
+    def version = "1.11"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.0 > *"
     // the other plugins this plugin depends on
@@ -110,6 +110,8 @@ In GSPs, the authoriseService is automatically added to the model and can be acc
         	}
         }
         
+        parameterNameDiscoverer(ProxyAwareParameterNameDiscoverer)
+        
         if (serviceNames) {
             authorisedServicesInterceptor(ClassLoaderPerProxyBeanNameAutoProxyCreator) {
         		proxyTargetClass = true
@@ -117,8 +119,6 @@ In GSPs, the authoriseService is automatically added to the model and can be acc
         		interceptorNames = ['methodAuthoriseInterceptor']
         	}
         	
-        	parameterNameDiscoverer(ProxyAwareParameterNameDiscoverer)
-
         	methodAuthoriseInterceptor(MethodAuthoriseInterceptor) { 
         	    authoriseService = ref(serviceClassBeanName)
         	    parameterNameDiscoverer = ref('parameterNameDiscoverer')
