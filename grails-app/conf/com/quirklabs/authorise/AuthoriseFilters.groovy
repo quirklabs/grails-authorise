@@ -1,6 +1,6 @@
-import za.co.quirklabs.authorise.*
+package com.quirklabs.authorise
+
 import java.lang.reflect.Method
-import org.codehaus.groovy.grails.commons.ApplicationHolder as AH
 
 class AuthoriseFilters {
     def authoriseService

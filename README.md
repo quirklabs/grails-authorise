@@ -42,11 +42,11 @@ def editProject(Project project) {
 }
 ```
 
-If the authorise method as annotated on a controller or service fails, an exception of type za.co.quirklabs.authorise.AuthorisationDeniedException will be thrown.
+If the authorise method as annotated on a controller or service fails, an exception of type com.quirklabs.authorise.AuthorisationDeniedException will be thrown.
 A good way to handle this is to create an ErrorsController with actions mapped in UrlMappings.groovy to send this exception and other errors to an appropriate GSP page e.g.
 
 ```groovy
-import za.co.quirklabs.authorise.AuthorisationDeniedException
+import com.quirklabs.authorise.AuthorisationDeniedException
 
 class UrlMappings {
 	static mappings = {

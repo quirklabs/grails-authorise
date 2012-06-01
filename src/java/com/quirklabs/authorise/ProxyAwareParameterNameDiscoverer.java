@@ -1,4 +1,4 @@
-package za.co.quirklabs.authorise;
+package com.quirklabs.authorise;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

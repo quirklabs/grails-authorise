@@ -1,6 +1,4 @@
-package za.co.quirklabs.authorise
-
-import org.codehaus.groovy.grails.commons.ApplicationHolder as AH
+package com.quirklabs.authorise
 
 /**
  * Helper class to inspect and cache Authorise annotated methods and classes
@@ -15,8 +13,8 @@ class AuthoriseAnnotationHelper {
   /**
    * Find controller annotation information. Called by BootStrap.init().
    */
-  static void init() {
-    AH.application.controllerClasses.each { controllerClass ->
+  static void init(GrailsApplication application) {
+    application.controllerClasses.each { controllerClass ->
       def clazz = controllerClass.clazz
       String controllerName = uncapitalize(controllerClass.name)
       mapClassAnnotation clazz, controllerName

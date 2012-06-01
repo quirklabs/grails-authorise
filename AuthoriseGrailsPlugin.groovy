@@ -1,13 +1,12 @@
-import za.co.quirklabs.authorise.*
+import com.quirklabs.authorise.*
 import grails.util.GrailsNameUtils
 import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator
-import org.codehaus.groovy.grails.commons.ApplicationHolder as AH
 
 /**
  * @author <a href='mailto:craig@quirk.biz'>Craig Raw</a>
  */
 class AuthoriseGrailsPlugin {
-    def version = "1.12"
+    def version = "1.2"
     def grailsVersion = "2.0 > *"
     def dependsOn = [:]
     def pluginExcludes = [
@@ -19,14 +18,14 @@ class AuthoriseGrailsPlugin {
     def description = "This plugin provides a framework for authorising actions in Controllers, methods in Services and visible elements in GSPs. No authentication or domain models are provided so you are free to use your own or another plugins'."
     def documentation = "https://github.com/quirklabs/grails-authorise/blob/master/README.md"
     def license = "APACHE"
-    def organization = [ name: "Quirk", url: "http://www.quirk.biz/" ]
+    def organization = [ name: "Quirk Labs", url: "http://www.quirklabs.co.za" ]
     def issueManagement = [ system: "github", url: "https://github.com/quirklabs/grails-authorise/issues" ]
     def scm = [ url: "https://github.com/quirklabs/grails-authorise" ]
 
     def watchedResources = ["file:./grails-app/controllers/**/*Controller.groovy","file:./grails-app/services/**/*Service.groovy"]
 
     def doWithSpring = {
-        def authoriseServiceClass = AH.application.config.grails.plugins.authorise.authoriseService
+        def authoriseServiceClass = application.config.grails.plugins.authorise.authoriseService
         if (!authoriseServiceClass) {
             throw new RuntimeException("grails.plugins.authorise.authoriseService must be configured to the fully qualified name of the service that will contain the authorisation methods")
         }
@@ -59,7 +58,7 @@ class AuthoriseGrailsPlugin {
     }
     
     def doWithApplicationContext = { appCtx ->
-        AuthoriseAnnotationHelper.init()
+        AuthoriseAnnotationHelper.init(application)
     }
     
     def onChange = { event ->
