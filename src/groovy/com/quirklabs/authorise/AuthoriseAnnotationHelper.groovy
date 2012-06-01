@@ -1,5 +1,7 @@
 package com.quirklabs.authorise
 
+import org.codehaus.groovy.grails.commons.GrailsApplication
+
 /**
  * Helper class to inspect and cache Authorise annotated methods and classes
  *
@@ -27,11 +29,11 @@ class AuthoriseAnnotationHelper {
   }
  
   // for testing
-  static void reset() {
+  static void reset(GrailsApplication application) {
     _actionMap.clear()
     _controllerAnnotationMap.clear()
     
-    init()
+    init(application)
   }
  
   // for testing

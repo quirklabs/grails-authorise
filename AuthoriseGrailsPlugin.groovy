@@ -62,7 +62,7 @@ class AuthoriseGrailsPlugin {
     }
     
     def onChange = { event ->
-        AuthoriseAnnotationHelper.reset()
+        AuthoriseAnnotationHelper.reset(application)
         
         ProxyAwareParameterNameDiscoverer nameDiscoverer = event.ctx.getBean("parameterNameDiscoverer")
         nameDiscoverer.clearCaches()
