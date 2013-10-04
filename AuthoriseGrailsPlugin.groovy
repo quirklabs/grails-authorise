@@ -6,8 +6,8 @@ import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator
  * @author <a href='mailto:craig@quirk.biz'>Craig Raw</a>
  */
 class AuthoriseGrailsPlugin {
-    def version = "1.2"
-    def grailsVersion = "2.0 > *"
+    def version = "1.3"
+    def grailsVersion = "2.3 > *"
     def dependsOn = [:]
     def pluginExcludes = [
         "grails-app/views/error.gsp"

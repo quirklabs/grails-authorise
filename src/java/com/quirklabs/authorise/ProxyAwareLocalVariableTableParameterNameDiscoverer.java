@@ -30,7 +30,8 @@ import org.springframework.asm.Label;
 import org.springframework.asm.MethodVisitor;
 import org.springframework.asm.Opcodes;
 import org.springframework.asm.Type;
-import org.springframework.asm.commons.EmptyVisitor;
+import org.springframework.asm.ClassVisitor;
+import org.springframework.asm.MethodVisitor;
 import org.springframework.util.ClassUtils;
 
 /**
@@ -119,7 +120,7 @@ public class ProxyAwareLocalVariableTableParameterNameDiscoverer implements Para
   {
     ClassReader classReader = getClassReader( method.getDeclaringClass() );
     FindMethodParameterNamesClassVisitor classVisitor = new FindMethodParameterNamesClassVisitor( method );
-    classReader.accept( classVisitor, false );
+    classReader.accept( classVisitor, 0 );
     return classVisitor;
   }
 
@@ -130,7 +131,7 @@ public class ProxyAwareLocalVariableTableParameterNameDiscoverer implements Para
   {
     ClassReader classReader = getClassReader( ctor.getDeclaringClass() );
     FindConstructorParameterNamesClassVisitor classVisitor = new FindConstructorParameterNamesClassVisitor( ctor );
-    classReader.accept( classVisitor, false );
+    classReader.accept( classVisitor, 0 );
     return classVisitor;
   }
 
@@ -173,7 +174,7 @@ public class ProxyAwareLocalVariableTableParameterNameDiscoverer implements Para
    * Helper class that looks for a given member name and descriptor, and then
    * attempts to find the parameter names for that member.
    */
-  private static abstract class ParameterNameDiscoveringVisitor extends EmptyVisitor
+  private static abstract class ParameterNameDiscoveringVisitor extends ClassVisitor
   {
 
     private String methodNameToMatch;
@@ -192,6 +193,7 @@ public class ProxyAwareLocalVariableTableParameterNameDiscoverer implements Para
 
     public ParameterNameDiscoveringVisitor( String name, boolean isStatic, Class[] paramTypes )
     {
+      super( Opcodes.ASM4 );
       this.methodNameToMatch = name;
       this.numParamsExpected = paramTypes.length;
       computeLvtSlotIndices( isStatic, paramTypes );
@@ -275,7 +277,7 @@ public class ProxyAwareLocalVariableTableParameterNameDiscoverer implements Para
     }
   }
 
-  private static class LocalVariableTableVisitor extends EmptyVisitor
+  private static class LocalVariableTableVisitor extends MethodVisitor
   {
 
     private final ParameterNameDiscoveringVisitor memberVisitor;
@@ -288,6 +290,7 @@ public class ProxyAwareLocalVariableTableParameterNameDiscoverer implements Para
 
     public LocalVariableTableVisitor( ParameterNameDiscoveringVisitor memberVisitor, boolean isStatic )
     {
+      super( Opcodes.ASM4 );
       this.memberVisitor = memberVisitor;
       this.isStatic = isStatic;
       this.parameterNames = new String[memberVisitor.numParamsExpected];
